@@ -1,20 +1,18 @@
 <?php include('partials/header.php') ?>
-<?php session_start(); ?>
 <?php include('Pokemon.php') ?>
 <header>
     <nav class="navbar navbar-expand-lg bg-danger rounded ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">POKE-mooon</a>
+            <a class="navbar-brand" href="#">AlexRod858</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <h5 class="px-2">0/5</h5>
                 <!--  -->
-                <form action="cinturon.php" method="POST" class="d-flex gap-2" role="search">
+                <form action="Pokemon.php" method="POST" class="d-flex gap-2" role="search">
                     <input name="input" class="form-control me-2" type="search" placeholder="Pikachu" aria-label="Search">
                     <button name="add" class="btn btn-outline-primary" type="submit">Añadir</button>
-                    <button class="btn btn-outline-primary" type="submit">Random</button>
+                    <!-- <button class="btn btn-outline-primary" type="submit">Random</button> -->
                 </form>
                 <!--  -->
             </div>
@@ -33,46 +31,23 @@
                 <h2 class="text-center mb-3">Cinturón</h2>
                 <hr>
                 <ul class="list-group">
-            
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-
-
-
-
-
-
-
-                            <span class="me-2"><?php '<pre>' . print_r($cinturon, true) . '</pre>'; ?></span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            <span>
-                                <!-- Puedes agregar enlaces o botones para acciones, por ejemplo, un botón de eliminar -->
-                                <a href="#" class="me-1">Eliminar</a>
-                            </span>
-                            <span>
-                                <!-- Agrega aquí más información según tus necesidades, por ejemplo, la imagen, ataque, vida, defensa -->
-                                <!-- <img src="<?php echo $pokemon->imagen; ?>" alt="Imagen de <?php echo $pokemon->nombre; ?>" style="width: 50px; height: auto;">
-                                <span class="ms-2">Ataque: <?php echo $pokemon->ataque; ?></span>
-                                <span class="ms-2">Vida: <?php echo $pokemon->vida; ?></span>
-                                <span class="ms-2">Defensa: <?php echo $pokemon->defensa; ?></span> -->
-                            </span>
-                        </li>
-     
+                    <?php if (!empty($cinturon)) : ?>
+                        <ul class="list-group">
+                            <?php foreach ($cinturon as $pokemon) : ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="me-2 fs-5"><strong><?php echo ucfirst($pokemon->nombre); ?></strong></span>
+                                    <span>
+                                        <span class="ms-2"><strong>Ataque: </strong><?php echo $pokemon->ataque; ?></span>
+                                        <span class="ms-2"><strong>Vida: </strong><?php echo $pokemon->vida; ?></span>
+                                        <span class="ms-2"><strong>Defensa: </strong><?php echo $pokemon->defensa; ?></span>
+                                        <img src="<?php echo $pokemon->imagen; ?>" alt="Imagen de <?php echo $pokemon->nombre; ?>" style="width: 50px; height: auto;">
+                                    </span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else : ?>
+                        <p>No hay Pokémon en el cinturón.</p>
+                    <?php endif; ?>
                 </ul>
 
             </div>
@@ -95,7 +70,8 @@
     <div class="row align-items-center">
         <div class="col text-center d-flex flex-column">
             <button class="btn btn-warning btn-lg mx-auto shadow-lg">Comenzar</button>
-            <button type="button" class="btn btn-danger btn-lg mx-auto mt-2 shadow-lg">Salir</button>
+            <a href="destroy_session.php" type="button" class="btn btn-primary btn-lg mx-auto mt-2 shadow-lg">Nuevo Juego</a>
+
         </div>
     </div>
 

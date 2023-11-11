@@ -1,5 +1,7 @@
 <?php
-// session_start();
+// if (session_status() == PHP_SESSION_NONE) {
+session_start();
+// }
 class Pokemon
 {
     public $nombre;
@@ -31,20 +33,22 @@ if (isset($_POST['add'])) {
     $pokemonData = file_get_contents($url);
     $pokemonInfo = json_decode($pokemonData, true);
 
-    $pokemon = new Pokemon(
-        $pokemonInfo['name'],
-        $pokemonInfo['sprites']['front_default'],
-        $pokemonInfo['stats'][0]['base_stat'],
-        $pokemonInfo['stats'][1]['base_stat'],
-        $pokemonInfo['stats'][2]['base_stat']
-    );
-    
-    $cinturon[] = $pokemon;
+    // Verificar si la información de Pokemon es válida antes de crear el objeto
+    if (!empty($pokemonInfo) && isset($pokemonInfo['name'], $pokemonInfo['sprites']['front_default'], $pokemonInfo['stats'][0]['base_stat'], $pokemonInfo['stats'][1]['base_stat'], $pokemonInfo['stats'][2]['base_stat'])) {
+        $pokemon = new Pokemon(
+            $pokemonInfo['name'],
+            $pokemonInfo['sprites']['front_default'],
+            $pokemonInfo['stats'][0]['base_stat'],
+            $pokemonInfo['stats'][1]['base_stat'],
+            $pokemonInfo['stats'][2]['base_stat']
+        );
 
-    // Almacenar $cinturon en la sesión
-    $_SESSION['cinturon'] = $cinturon;
-    var_dump($cinturon);
+        $cinturon[] = $pokemon;
 
-    header('Location: index.php');
-
+        // Almacenar $cinturon en la sesión
+        $_SESSION['cinturon'] = $cinturon;
+        header('Location: index.php');
+    } else {
+        echo "La información del Pokémon no es válida.";
+    }
 }
