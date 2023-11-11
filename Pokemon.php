@@ -27,6 +27,7 @@ if (isset($_SESSION['cinturon'])) {
     $cinturon = $_SESSION['cinturon'];
 }
 
+// ME LOS GUARDO EN EL ARAY
 if (isset($_POST['add'])) {
     $nombre = $_POST['input'];
     $url = 'https://pokeapi.co/api/v2/pokemon/' . strtolower($nombre);
@@ -35,7 +36,7 @@ if (isset($_POST['add'])) {
 
     $pokemon = new Pokemon(
         $pokemonInfo['name'],
-        $pokemonInfo['sprites']['front_default'],
+        $pokemonInfo['sprites']['back_default'],
         $pokemonInfo['stats'][0]['base_stat'],
         $pokemonInfo['stats'][1]['base_stat'],
         $pokemonInfo['stats'][2]['base_stat']
@@ -48,6 +49,7 @@ if (isset($_POST['add'])) {
     header('Location: index.php');
 }
 
+// OBTENER FUNCION
 function obtenerPokemon($numero)
 {
     $url = 'https://pokeapi.co/api/v2/pokemon/' . $numero;
@@ -63,6 +65,7 @@ function obtenerPokemon($numero)
     );
 }
 
+// ARRAY CON 5 POKEMON RANDOM
 function equipo_rival()
 {
     $cinturon_rival = [];

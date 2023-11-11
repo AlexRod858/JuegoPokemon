@@ -5,7 +5,7 @@
 <!-- -------------------------- -->
 <div style="background-image: url(https://images5.alphacoders.com/608/608323.png); background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; width: auto;">
+  background-size: cover; width: auto; min-height: 98vh;">
     <!-- Contenido superior -->
     <!-- -------------------------- -->
     <!-- -------------------------- -->
@@ -27,35 +27,48 @@
     </div>
     <!-- -------------------------- -->
     <!-- -------------------------- -->
+    <?php $equipo_rival = equipo_rival() ?>
 
+    <!-- -------------------------- -->
+    <!-- -------------------------- -->
     <div class="row">
-        <div class="col-4 d-flex flex-column justify-content-between">
-            <!-- Contenido -->
-            <div>
-                <!-- ... tu contenido aquí ... -->
-            </div>
-            <div class="">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/35.png" style="width: 500px; height: auto;" alt="">
-            </div>
-            <!-- Fin del contenido -->
-        </div>
-        <div class="col-4">
-            <!-- Contenido -->
-            <!-- ... tu contenido aquí ... -->
-            <!-- Fin del contenido -->
-        </div>
-        <div class="col-4 d-flex flex-column justify-content-between" style="min-height: 85vh;">
-            <!-- Contenido -->
-            <div>
-                <!-- ... tu contenido aquí ... -->
-            </div>
-            <div class="">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" style="width: 500px; height: auto;" alt="">
-            </div>
-            <!-- Fin del contenido -->
-        </div>
+    <div class="col-4 d-flex flex-column align-items-center justify-content-end" style="min-height: 90vh;" id="usuario-container">
+        <!-- Contenido del usuario -->
+        <img src="" alt="Imagen del usuario" id="usuario-imagen" style="width: 500px; height: auto;">
     </div>
+    <div class="col-4">
+        <!-- Contenido -->
+    </div>
+    <div class="col-4 d-flex flex-column align-items-center justify-content-end" id="rival-container">
+        <!-- Contenido del rival -->
+        <img src="" alt="Imagen del rival" id="rival-imagen" style="width: 500px; height: auto;">
+    </div>
+</div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var cinturonUsuario = <?php echo json_encode($cinturon); ?>;
+        var cinturonRival = <?php echo json_encode($equipo_rival); ?>;
+        var index = 0;
+
+        function mostrarSiguientePokemon() {
+            document.getElementById('usuario-imagen').src = cinturonUsuario[index].imagen;
+            document.getElementById('rival-imagen').src = cinturonRival[index].imagen;
+            index++;
+
+            // Reiniciar el índice si se han mostrado todos los Pokémon
+            if (index >= cinturonUsuario.length) {
+                index = 0;
+            }
+
+            // Esperar 5 segundos antes de mostrar el siguiente Pokémon
+            setTimeout(mostrarSiguientePokemon, 5000);
+        }
+
+        // Iniciar el proceso al cargar la página
+        mostrarSiguientePokemon();
+    });
+</script>
 
 
     <!-- ------------------------- -->
