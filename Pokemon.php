@@ -33,22 +33,42 @@ if (isset($_POST['add'])) {
     $pokemonData = file_get_contents($url);
     $pokemonInfo = json_decode($pokemonData, true);
 
-    // Verificar si la información de Pokemon es válida antes de crear el objeto
-    if (!empty($pokemonInfo) && isset($pokemonInfo['name'], $pokemonInfo['sprites']['front_default'], $pokemonInfo['stats'][0]['base_stat'], $pokemonInfo['stats'][1]['base_stat'], $pokemonInfo['stats'][2]['base_stat'])) {
-        $pokemon = new Pokemon(
-            $pokemonInfo['name'],
-            $pokemonInfo['sprites']['front_default'],
-            $pokemonInfo['stats'][0]['base_stat'],
-            $pokemonInfo['stats'][1]['base_stat'],
-            $pokemonInfo['stats'][2]['base_stat']
-        );
+    $pokemon = new Pokemon(
+        $pokemonInfo['name'],
+        $pokemonInfo['sprites']['front_default'],
+        $pokemonInfo['stats'][0]['base_stat'],
+        $pokemonInfo['stats'][1]['base_stat'],
+        $pokemonInfo['stats'][2]['base_stat']
+    );
 
-        $cinturon[] = $pokemon;
+    $cinturon[] = $pokemon;
 
-        // Almacenar $cinturon en la sesión
-        $_SESSION['cinturon'] = $cinturon;
-        header('Location: index.php');
-    } else {
-        echo "La información del Pokémon no es válida.";
+    // Almacenar $cinturon en la sesión
+    $_SESSION['cinturon'] = $cinturon;
+    header('Location: index.php');
+}
+
+function obtenerPokemon($numero)
+{
+    $url = 'https://pokeapi.co/api/v2/pokemon/' . $numero;
+    $pokemonData = file_get_contents($url);
+    $pokemonInfo = json_decode($pokemonData, true);
+
+    return new Pokemon(
+        $pokemonInfo['name'],
+        $pokemonInfo['sprites']['front_default'],
+        $pokemonInfo['stats'][0]['base_stat'],
+        $pokemonInfo['stats'][1]['base_stat'],
+        $pokemonInfo['stats'][2]['base_stat']
+    );
+}
+
+function equipo_rival()
+{
+    $cinturon_rival = [];
+    for ($i = 0; $i < 5; $i++) {
+        $numeroAleatorio = rand(1, 151);
+        $cinturon_rival[] = obtenerPokemon($numeroAleatorio);
     }
+    return $cinturon_rival;
 }

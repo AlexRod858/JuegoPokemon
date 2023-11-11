@@ -1,5 +1,5 @@
 <?php include('../partials/header.php') ?>
-
+<?php include('../Pokemon.php') ?>
 
 
 <!-- -------------------------- -->
@@ -9,6 +9,7 @@
     <!-- Contenido superior -->
     <!-- -------------------------- -->
     <!-- -------------------------- -->
+    <a href="../index.php" class="btn btn-primary ms-2 mt-2">Inicio</a>
     <div class="row text-center pt-3">
         <div class="col-4">
             <span class="fs-1">
@@ -43,7 +44,7 @@
             <!-- ... tu contenido aquí ... -->
             <!-- Fin del contenido -->
         </div>
-        <div class="col-4 d-flex flex-column justify-content-between" style="min-height: 91vh;">
+        <div class="col-4 d-flex flex-column justify-content-between" style="min-height: 85vh;">
             <!-- Contenido -->
             <div>
                 <!-- ... tu contenido aquí ... -->

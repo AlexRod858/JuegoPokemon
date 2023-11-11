@@ -31,24 +31,23 @@
                 <h2 class="text-center mb-3">Cinturón</h2>
                 <hr>
                 <ul class="list-group">
-                    <?php if (!empty($cinturon)) : ?>
-                        <ul class="list-group">
-                            <?php foreach ($cinturon as $pokemon) : ?>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <span class="me-2 fs-5"><strong><?php echo ucfirst($pokemon->nombre); ?></strong></span>
-                                    <span>
-                                        <span class="ms-2"><strong>Ataque: </strong><?php echo $pokemon->ataque; ?></span>
-                                        <span class="ms-2"><strong>Vida: </strong><?php echo $pokemon->vida; ?></span>
-                                        <span class="ms-2"><strong>Defensa: </strong><?php echo $pokemon->defensa; ?></span>
-                                        <img src="<?php echo $pokemon->imagen; ?>" alt="Imagen de <?php echo $pokemon->nombre; ?>" style="width: 50px; height: auto;">
-                                    </span>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else : ?>
+                    <?php if (!empty($cinturon)) { ?>
+                        <?php foreach ($cinturon as $pokemon) { ?>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="me-2 fs-5"><strong><?php echo ucfirst($pokemon->nombre); ?></strong></span>
+                                <span>
+                                    <span class="ms-2"><strong>Ataque: </strong><?php echo $pokemon->ataque; ?></span>
+                                    <span class="ms-2"><strong>Vida: </strong><?php echo $pokemon->vida; ?></span>
+                                    <span class="ms-2"><strong>Defensa: </strong><?php echo $pokemon->defensa; ?></span>
+                                    <img src="<?php echo $pokemon->imagen; ?>" alt="Imagen de <?php echo $pokemon->nombre; ?>" style="width: 50px; height: auto;">
+                                </span>
+                            </li>
+                        <?php } ?>
+                    <?php } else { ?>
                         <p>No hay Pokémon en el cinturón.</p>
-                    <?php endif; ?>
+                    <?php } ?>
                 </ul>
+
 
             </div>
         </div>
@@ -69,7 +68,7 @@
 
     <div class="row align-items-center">
         <div class="col text-center d-flex flex-column">
-            <button class="btn btn-warning btn-lg mx-auto shadow-lg">Comenzar</button>
+            <a href="pages/batalla.php" class="btn btn-warning btn-lg mx-auto shadow-lg">Comenzar</a>
             <a href="destroy_session.php" type="button" class="btn btn-primary btn-lg mx-auto mt-2 shadow-lg">Nuevo Juego</a>
 
         </div>
