@@ -46,7 +46,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             var cinturonUsuario = <?php echo json_encode($cinturon); ?>;
             var cinturonRival = <?php echo json_encode($equipo_rival); ?>;
-            var index = 0; // Cambiado a 1 para que inicie con la segunda pareja
+            var index = 0;
 
             // Función para mostrar la siguiente pareja
             function mostrarSiguientePareja() {
@@ -60,18 +60,39 @@
                 }
             }
 
-            // Mostrar la primera pareja al cargar la página
+            // Mostrar las dos primeras parejas al cargar la página
             mostrarSiguientePareja();
+
+            // Función para iniciar el temporizador
+            function iniciarTemporizador() {
+                var segundos = 5;
+                var temporizador = document.getElementById('temporizador');
+
+                function actualizarTemporizador() {
+                    temporizador.innerText = segundos;
+                    segundos--;
+
+                    // Mostrar la siguiente pareja cuando el temporizador llega a 0
+                    if (segundos < 0) {
+                        mostrarSiguientePareja();
+                        clearInterval(intervalo);
+                        temporizador.innerText = ''; // Limpiar el temporizador
+                    }
+                }
+
+                actualizarTemporizador(); // Mostrar el primer segundo inmediatamente
+
+                // Actualizar el temporizador cada segundo
+                var intervalo = setInterval(actualizarTemporizador, 1000);
+            }
 
             // Agregar evento click al botón "PELEAR"
             document.getElementById('pelea').addEventListener('click', function () {
-                mostrarSiguientePareja();
-                // iniciarTemporizador(); 
+                iniciarTemporizador();
             });
         });
     </script>
 </div>
-
 
 
 
