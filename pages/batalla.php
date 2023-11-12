@@ -27,7 +27,7 @@
     <?php $equipo_rival = equipo_rival() ?>
 
     <div class="row">
-        <div class="col-4 d-flex flex-column align-items-center justify-content-end" style="min-height: 80;" id="usuario-container">
+        <div class="col-4 d-flex flex-column align-items-center justify-content-end" style="min-height: 80vh;" id="usuario-container">
             <!-- Contenido del usuario -->
             <img src="" alt="Imagen del usuario" id="usuario-imagen" style="width: 500px; height: auto;">
         </div>
@@ -140,10 +140,32 @@
 
             // Agregar evento click al botón "PELEAR"
             document.getElementById('pelea').addEventListener('click', function() {
-                index++; // Mover al siguiente índice al hacer clic en el botón
-                mostrarParejaActual();
-                iniciarTemporizador();
-            });
+    if (index < cinturonUsuario.length - 1) {
+        index++; // Mover al siguiente índice al hacer clic en el botón
+        mostrarParejaActual();
+        iniciarTemporizador();
+    } else {
+        // Desactivar el botón actual
+        document.getElementById("pelea").disabled = true;
+
+        // Crear un nuevo botón para jugar de nuevo
+        var nuevoBoton = document.createElement("button");
+        nuevoBoton.innerHTML = "Jugar de nuevo";
+        nuevoBoton.className = "btn btn-success";
+        nuevoBoton.addEventListener("click", function() {
+            // Puedes redirigir a la página de inicio aquí o realizar cualquier otra acción necesaria
+            window.location.href = "../index.php";
+        });
+
+        // Agregar el nuevo botón al mismo contenedor del botón actual
+        var contenedorBoton = document.getElementById("pelea").parentElement;
+        contenedorBoton.appendChild(nuevoBoton);
+
+        console.log('Fin de la batalla');
+    }
+});
+
+
             /////////////////////////////////////
             /////////////////////////////////////
             /////////////////////////////////////
