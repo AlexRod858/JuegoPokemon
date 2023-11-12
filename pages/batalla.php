@@ -84,20 +84,22 @@
                 var promedioUsuario = calcularPromedio(usuario);
                 var promedioRival = calcularPromedio(rival);
 
+                let vidas = document.getElementById('vidas');
+                let vidasRival = document.getElementById('vidas_rival');
                 // Determinar el ganador y actualizar visualmente
                 var resultado = document.getElementById('resultado');
                 if (promedioUsuario > promedioRival) {
                     resultado.innerHTML = '<span style="color: green;">¡Ganaste!</span>';
-                    let vidas = document.getElementById('vidas');
                     vidas.innerHTML += '🟢';
+                    vidasRival.innerHTML += '🔴';
                 } else if (promedioUsuario < promedioRival) {
                     resultado.innerHTML = '<span style="color: red;">¡Perdiste!</span>';
-                    let vidas = document.getElementById('vidas');
                     vidas.innerHTML += '🔴';
+                    vidasRival.innerHTML += '🟢';
                 } else {
                     resultado.innerHTML = '<span style="color: blue;">¡Empate!</span>';
-                    let vidas = document.getElementById('vidas');
                     vidas.innerHTML += '🔵';
+                    vidasRival.innerHTML += '🔵';
                 }
             }
             /////////////////////////////////////
